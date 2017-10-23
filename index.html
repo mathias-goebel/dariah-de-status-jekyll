@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>DARIAH-DE :: Status</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DARIAH-DE">
+    <link rel="alternate" type="application/atom+xml" title="Commits as RSS Feed" href="http://github.com/schildwaechter/dariah-de-status-jekyll/commits/master.atom" />
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="css/bootstrap-responsive.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="css/application.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="css/bootstrap-customization.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="css/bootstrap-modal.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/dariah_portal.css" type="text/css" media="screen, projection" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+          <![endif]-->
+    <link rel="shortcut icon" type="image/png" href="img/page_icon.png" />
+    <style>
+
+       p:lang(de) {
+        display: none;
+       }
+
+    </style>
+  </head>
+  <body>
+    <div id="content_layout">
+      <div class="span8 main-content-wrapper">
+        <div id="content" class="primary-area">
+
+          <h1>DARIAH-DE :: Status</h1>
+
+<div class="status info">
+  <h2>Current notifications</h2>
+    <p>Latest update: <strong>Mon Oct 23 22:58:02 2017</strong></p>
+
+
+
+
+
+  <div class="alert alert-success">All services are available</div>
+
+
+
+
+
+
+
+</div>
+
+<p><a href="mailto:support@de.dariah.eu?subject=Service down"><i class="fa fa-envelope" aria-hidden="true"></i> Is there a service missing? Please contact us.</a></p>
+
+<div id="TextGridError" display="none">
+<br />
+<div id="repstatusError"></div>
+</div>
+
+<p><br /></p>
+
+<div class="status info">
+<!--
+<h2>Scheduled maintenance (upcoming)</h2>
+<div class="alert alert-warning">
+<h3>DARIAH Service Downtime on Saturday, July 22</h3>
+<p lang="en">
+Due to maintanance work at the computing center (interruption of the power supply) some DARIAH-DE Services
+are still not available, <time datetime="2017-07-24">July 24</time> (new date!):
+</p>
+<ul>
+<li>TextGrid</li>
+<li>DARIAH-DE Etherpad</li>
+<li>DARIAH-DE Generic Search</li>
+<li>DARIAH-DE Collection Registry</li>
+<li>DARIAH-DE Data Modelling Environment</li>
+<li>DARIAH-DE Cosmotool</li>
+<li>DARIAH-DE Geo-Browser</li>
+<li>DARIAH-DE GeoServer</li>
+<li>DARIAH-DE Norm-Daten-Dienste</li>
+<li>DARIAH-DE Annotation Sandbox</li>
+<li>DARIAH-DE App Jüdischer Orte</li>
+<li>DARIAH-DE CollateX</li>
+<li>DARIAH-DE Developer Platform (CI)</li>
+<li>DARIAH-DE Repository</li>
+<li>Fontane Notizbücher</li>
+</ul>
+<p>
+See also the <a href="https://info.gwdg.de/news/en/information-interruption-of-the-power-supply-at-the-max-planck-campus-and-fmz/">GWDG Announcement</a>.
+</p>
+</div>
+-->
+<div id="TextGridWarning" display="none">
+<div id="repstatusWarning">&nbsp;</div>
+</div>
+</div>
+
+<p><br /></p>
+
+<p><a class="twitter-timeline" data-height="600" href="https://twitter.com/DARIAHdeTech">Tweets by DARIAHdeTech</a> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+
+
+
+
+        </div>
+        <div class="row">
+          <div class="central_logo_de"></div>
+          <div class="pull-right" style="margin-bottom:5px;margin-right:5px">
+            <a href="http://github.com/schildwaechter/dariah-de-status-jekyll">
+              <span class="">View on GitHub</span>
+              <img width="20px" src="img/GitHub-Mark/PNG/GitHub-Mark-32px.png"></img>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row dfooter footer">
+        <div class="span7">
+          <!--<div class="row">-->
+            <hr/>
+            <p>
+              Digital Research Infrastructure for the Arts and Humanities.
+              <a class="pull-right" href="https://de.dariah.eu/Impressum">Imprint</a>
+            </p>
+
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      $.get('textgrid/repstatus.html', function(data) {
+        var statusHtml = $(data).filter('.repstatus, .status').not('.ok');
+        console.log(statusHtml)
+        $(statusHtml).each(function (id, val) {
+          //$("#repstatus").prepend(val);
+          var status;
+          if($(val).hasClass('warning')) {
+            document.getElementById("TextGridWarning").style.display="";
+            status='<div class="alert alert-warning"><h3>TextGrid Service Warning</h3><p id="TGtext"></p></div>';
+            $("#repstatusWarning").prepend(status);
+          } else if ($(val).hasClass('error')) {
+            document.getElementById("TextGridError").style.display="";
+            status='<div class="alert alert-error">TextGrid Service Error<p id="TGtext"></p></div>';
+            $("#repstatusError").prepend(status);
+          } else if ($(val).hasClass('info')) {
+            document.getElementById("TextGridWarning").style.display="";
+            status='<h3>TextGrid Info</h3><p id="TGtext"></p>';
+            $("#repstatusWarning").prepend(status);
+          }
+          $("#TGtext").prepend(val);
+        });
+      }, "html")
+    });
+    </script>
+  </body>
+</html>
