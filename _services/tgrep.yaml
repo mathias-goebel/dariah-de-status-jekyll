@@ -6,4 +6,5 @@ dependencies:
   - '/middlewares/liferay'
   - '/middlewares/tgcrud'
   - '/servers/textgrid-esx2'
+  - '/services/mirador'
 ---

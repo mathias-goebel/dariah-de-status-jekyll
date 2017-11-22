@@ -1,0 +1,10 @@
+---
+title: 'TextGrid Mirador'
+description: 'Centralized IIIF-Viewer aware of TextGrid URIs'
+website: 'https://textgridlab.org/1.0/iiif/m2/?json=440783'
+dependencies:
+  - '/middlewares/tgcrud'
+  - '/middlewares/dariahstorage'
+  - '/servers/textgrid-esx2'
+  - '/services/tgrep'
+---
